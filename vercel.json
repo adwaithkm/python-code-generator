@@ -8,8 +8,7 @@
   ],
   "routes": [
     {
-      "src": "/generateCode",
-      "methods": ["POST"],
+      "src": "/api/generateCode",
       "dest": "api/generateCode.py"
     }
   ]
