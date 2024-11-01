@@ -4,57 +4,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Python Code Generator</title>
-    <!-- Add styling here if you want -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        input, button {
+            padding: 10px;
+            margin-top: 10px;
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Python Code Generator</h1>
-        <textarea id="userInput" placeholder="Describe the code you need..."></textarea>
-        <button id="generateBtn">Generate Code</button>
-
-        <div id="outputContainer">
-            <pre id="output"></pre>
-            <button id="copyBtn">Copy Code</button>
-        </div>
-    </div>
-
+    <h1>Python Code Generator</h1>
+    <form id="codeForm">
+        <label for="codePrompt">Enter your prompt:</label>
+        <input type="text" id="codePrompt" placeholder="e.g., print 'Hello World'" required>
+        <button type="submit">Generate Code</button>
+    </form>
+    <h2>Generated Code:</h2>
+    <pre id="generatedCode"></pre>
+    
     <script>
-        const generateBtn = document.getElementById('generateBtn');
-        const outputContainer = document.getElementById('outputContainer');
-        const output = document.getElementById('output');
-        const copyBtn = document.getElementById('copyBtn');
-
-        generateBtn.addEventListener('click', async () => {
-            const userInput = document.getElementById('userInput').value.trim();
-            if (!userInput) {
-                alert("Please enter a description.");
-                return;
-            }
-
+        document.getElementById('codeForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+            const prompt = document.getElementById('codePrompt').value;
             const response = await fetch('/api/generateCode', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ prompt: userInput })
+                body: JSON.stringify({ prompt: prompt })
             });
 
             if (response.ok) {
                 const data = await response.json();
-                output.textContent = data.code;
-                outputContainer.style.display = 'block';
+                document.getElementById('generatedCode').textContent = data.code;
             } else {
-                output.textContent = 'Error generating code. Please try again.';
-                outputContainer.style.display = 'block';
+                document.getElementById('generatedCode').textContent = 'Error generating code. Please try again.';
             }
-        });
-
-        copyBtn.addEventListener('click', () => {
-            navigator.clipboard.writeText(output.textContent).then(() => {
-                alert("Code copied to clipboard!");
-            }).catch(err => {
-                console.error('Failed to copy: ', err);
-            });
         });
     </script>
 </body>
