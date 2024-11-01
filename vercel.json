@@ -1,11 +1,14 @@
 {
-  "version": 2,
   "builds": [
-    { "src": "api/generateCode.py", "use": "@vercel/python" },
-    { "src": "index.html", "use": "@vercel/static" }
+    {
+      "src": "Dockerfile",
+      "use": "@vercel/docker"
+    }
   ],
   "routes": [
-    { "src": "/api/generateCode", "dest": "/api/generateCode.py" },
-    { "src": "/(.*)", "dest": "/index.html" }
+    {
+      "src": "/(.*)",
+      "dest": "/api/generateCode.py"
+    }
   ]
 }
