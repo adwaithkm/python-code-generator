@@ -4,8 +4,9 @@ export default async function handler(req, res) {
     if (req.method === 'POST') {
         const { prompt } = req.body; // Get the prompt from the request body
 
+        console.log('Received prompt:', prompt); // Log the prompt for debugging
+
         try {
-            // Make a POST request to the Groq API
             const response = await axios.post('https://api.groq.com/openai/v1/chat/completions', {
                 model: "llama3-8b-8192", // Specify the model to use
                 messages: [{
@@ -37,3 +38,4 @@ export default async function handler(req, res) {
         res.status(405).end(`Method ${req.method} Not Allowed`);
     }
 }
+
