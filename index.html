@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Code Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        #output {
+            margin-top: 20px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            white-space: pre-wrap; /* Preserve whitespace */
+            background-color: #f9f9f9; /* Light background for code */
+        }
+    </style>
+</head>
+<body>
+    <h1>Python Code Generator</h1>
+    <textarea id="input" rows="5" cols="50" placeholder="Describe the Python code you need..."></textarea><br>
+    <button id="send">Generate Code</button>
+    <div id="output"></div>
+
+    <script>
+        document.getElementById('send').addEventListener('click', async () => {
+            const input = document.getElementById('input').value;
+            const outputDiv = document.getElementById('output');
+            outputDiv.innerHTML = 'Loading...';
+
+            try {
+                const response = await fetch('https://your-proxy-url.com/api/openai', { // Update with your proxy URL
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ prompt: `Generate Python code for: ${input}` })
+                });
+                const data = await response.json();
+                outputDiv.innerHTML = data.response;
+            } catch (error) {
+                outputDiv.innerHTML = 'Error: ' + error.message;
+            }
+        });
+    </script>
+</body>
+</html>
