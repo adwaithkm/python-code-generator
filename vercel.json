@@ -1,14 +1,7 @@
 {
-  "builds": [
-    {
-      "src": "Dockerfile",
-      "use": "@vercel/docker"
+  "build": {
+    "env": {
+      "PYTHONUNBUFFERED": "1"
     }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "/api/generateCode.py"
-    }
-  ]
+  }
 }
