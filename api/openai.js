@@ -13,7 +13,7 @@ export default async function handler(req, res) {
                 messages: [{ role: 'user', content: `Generate Python code for: ${prompt}` }],
             }, {
                 headers: {
-                    'Authorization': `Bearer ${process.env.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}`, // Use the API key from environment variables
+                    'Authorization': `Bearer ${process.env.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}`, // Use the API key from environment variables
                     'Content-Type': 'application/json',
                 }
             });
