@@ -1,17 +1,18 @@
 {
   "name": "python-code-generator",
   "version": "1.0.0",
-  "description": "A project to generate Python code.",
+  "description": "A Python code generator using transformers.",
   "main": "index.js",
   "scripts": {
-    "vercel-build": "echo 'This is a placeholder for your build command'",
-    "start": "echo 'This is a placeholder for your start command'"
+    "build": "echo 'No build step required'",
+    "start": "vercel dev",
+    "vercel-build": "echo 'This is a placeholder for your build command'"
   },
   "dependencies": {
+    "express": "^4.17.1",
     "fastapi": "^0.95.0",
     "uvicorn": "^0.22.0",
-    "torch": "^2.0.0",
-    "transformers": "^4.29.2"
+    "torch": "^2.0.0"
   },
   "devDependencies": {},
   "keywords": [],
