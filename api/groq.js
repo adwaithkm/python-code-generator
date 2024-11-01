@@ -7,7 +7,7 @@ export default async function handler(req, res) {
         console.log('Received prompt:', prompt); // Log the prompt for debugging
 
         try {
-            const response = await axios.post('https://api.groq.com', {
+            const response = await axios.post('https://api.groq.com/', {
                 model: "llama3-8b-8192", // Specify the model to use
                 messages: [{
                     role: "user", // Role of the message sender
