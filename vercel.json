@@ -1,7 +1,16 @@
 {
-  "build": {
-    "env": {
-      "PYTHONUNBUFFERED": "1"
+  "version": 2,
+  "builds": [
+    {
+      "src": "api/generateCode.py",
+      "use": "@vercel/python"
     }
-  }
+  ],
+  "routes": [
+    {
+      "src": "/generateCode",
+      "methods": ["POST"],
+      "dest": "api/generateCode.py"
+    }
+  ]
 }
