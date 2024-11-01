@@ -1,11 +1,11 @@
-FROM python:3.9-alpine
+FROM python:3.9-slim
 
 WORKDIR /app
 
-COPY . .
-
+# Copy only requirements first for caching
+COPY requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
 
-EXPOSE 8000
+COPY . .
 
 CMD ["uvicorn", "generateCode:app", "--host", "0.0.0.0", "--port", "8000"]
