@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Code Generator</title>
+    <!-- Add styling here if you want -->
+</head>
+<body>
+    <div class="container">
+        <h1>Python Code Generator</h1>
+        <textarea id="userInput" placeholder="Describe the code you need..."></textarea>
+        <button id="generateBtn">Generate Code</button>
+
+        <div id="outputContainer">
+            <pre id="output"></pre>
+            <button id="copyBtn">Copy Code</button>
+        </div>
+    </div>
+
+    <script>
+        const generateBtn = document.getElementById('generateBtn');
+        const outputContainer = document.getElementById('outputContainer');
+        const output = document.getElementById('output');
+        const copyBtn = document.getElementById('copyBtn');
+
+        generateBtn.addEventListener('click', async () => {
+            const userInput = document.getElementById('userInput').value.trim();
+            if (!userInput) {
+                alert("Please enter a description.");
+                return;
+            }
+
+            const response = await fetch('/api/generateCode', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ prompt: userInput })
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                output.textContent = data.code;
+                outputContainer.style.display = 'block';
+            } else {
+                output.textContent = 'Error generating code. Please try again.';
+                outputContainer.style.display = 'block';
+            }
+        });
+
+        copyBtn.addEventListener('click', () => {
+            navigator.clipboard.writeText(output.textContent).then(() => {
+                alert("Code copied to clipboard!");
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
+            });
+        });
+    </script>
+</body>
+</html>
